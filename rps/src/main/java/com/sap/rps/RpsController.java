@@ -25,6 +25,15 @@ class PlayReq{
 	public float time;
 }
 
+class Result{
+	public int result;
+	public String stat;
+	public Result(int result, String stat){
+		this.result = result;
+		this.stat = stat;
+	}
+}
+
 
 
 @RestController
@@ -54,8 +63,8 @@ public class RpsController {
 	}
 
 	@PutMapping("/play")
-	public String play(@RequestBody PlayReq Play){
-		int result;
+	public Result play(@RequestBody PlayReq Play){
+		int result = 0;
 		int chances = 0;
 		for (RpsModel temp : arr){
 			if(temp.chances >= 10){
@@ -81,12 +90,8 @@ public class RpsController {
 			System.out.println("---------------");
 		}
 		if(chances < MAX_CHANCES){
-			return new String("proceed");
+			return (new Result(result,"proceed"));
 		}
-		return new String("finish");
+		return (new Result(2,"finish"));
 	}
-
-	
-
-
 }
