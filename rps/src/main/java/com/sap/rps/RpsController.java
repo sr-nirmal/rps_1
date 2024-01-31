@@ -13,10 +13,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 class NameReq{
 	public String name;
 	public NameReq(){}
+}
+
+class Response{
+	public String prompt;
+	public Response(String prompt){
+		this.prompt = prompt;
+	}
 }
 
 class PlayReq{
@@ -26,9 +34,10 @@ class PlayReq{
 }
 
 class Result{
-	public int result;
+	public int result, computer;
 	public String stat;
-	public Result(int result, String stat){
+	public Result(int computer, int result, String stat){
+		this.computer = computer;
 		this.result = result;
 		this.stat = stat;
 	}
@@ -37,6 +46,7 @@ class Result{
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class RpsController {
 
 	RpsServices services =  new RpsServices();
@@ -44,7 +54,8 @@ public class RpsController {
 	int MAX_CHANCES = 10;
 
 	@PutMapping("/start")
-	public String start(@RequestBody NameReq Name) {
+	public Response start(@RequestBody NameReq Name) {
+		System.out.println(Name.name);
 		for (RpsModel temp : arr){
 			System.out.println(temp.name +" "+ Name.name);
 			if(temp.name.equals(Name.name)){
@@ -52,19 +63,20 @@ public class RpsController {
 				temp.loses = 0;
 				temp.draws = 0;
 				temp.time = 0;
-				return new String("success");
+				return new Response("Success");
 			}
 		}
 		arr.add(new RpsModel(Name.name, 0, 0, 0, 0));
 		// for (RpsModel printTemp : arr){
 		// 	System.out.println(printTemp.name +" "+ printTemp.wins +" "+ printTemp.chances);
 		// }
-		return new String("Success");
+		return new Response("Success");
 	}
 
 	@PutMapping("/play")
 	public Result play(@RequestBody PlayReq Play){
-		int result = 0;
+		int[] result;
+		int Result = 0 , Computer = 0;
 		int chances = 0;
 		for (RpsModel temp : arr){
 			if(temp.chances >= 10){
@@ -74,10 +86,13 @@ public class RpsController {
 			else{
 				if(temp.name.equals(Play.name)){
 					result = services.check(Play.move);
-					System.out.println("Result -> "+result);
-					if(result == 0){temp.draws++;}
-					if(result == -1){temp.loses++;}
-					if(result ==  1){temp.wins++;}
+					
+					Computer = result[1];
+					Result = result[0];
+					System.out.println("Result -> "+Result+" "+Computer);
+					if(Result == 0){temp.draws++;}
+					if(Result == -1){temp.loses++;}
+					if(Result ==  1){temp.wins++;}
 					chances = temp.chances++ ;
 					break;
 				}
@@ -85,13 +100,13 @@ public class RpsController {
 			
 		}
 
-		for (RpsModel printTemp : arr){
-			System.out.println(printTemp.name +" "+ printTemp.wins +" "+ printTemp.chances);
-			System.out.println("---------------");
-		}
+		// for (RpsModel printTemp : arr){
+		// 	System.out.println(printTemp.name +" "+ printTemp.wins +" "+ printTemp.chances);
+		// 	System.out.println("---------------");
+		// }
 		if(chances < MAX_CHANCES){
-			return (new Result(result,"proceed"));
+			return (new Result(Computer,Result,"proceed"));
 		}
-		return (new Result(2,"finish"));
+		return (new Result(Computer, Result, "finish"));
 	}
 }

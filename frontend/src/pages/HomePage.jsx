@@ -4,6 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
 import title from '../images/home_title.jpg';
 import buttonImage from '../images/playbutton.jpg';
+// import axios from 'axios'
+
+
+// export const apiClient = axios.create(
+//   {
+//       baseURL: 'http://localhost:8080'
+//   }
+// );
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -18,8 +26,26 @@ const HomePage = () => {
   const handleButtonClick = () => {
     console.log('Button clicked!');
     setIsPressed((prev) => !prev);
-    //name request
-    navigate(`/main-page/${userName}`);
+
+    fetch('http://localhost:8080/start', {
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ "name": userName })
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log("logged in");
+          console.log(data);
+          navigate(`/main-page/${userName}`);
+        
+      })
+
+      .catch(error => {
+          console.error('Error:', error);
+      });
+   
   };
 
   return (
