@@ -16,6 +16,7 @@ const MainPage = () => {
   const [computerScore, setComputerScore] = useState(0);
   const [userMove, setUserMove] = useState(-1);
   const [computerMove, setComputerMove] = useState(-1);
+  const [chances, setChances] = useState(10);
   const rock = 0;
   const paper = 1;
   const scissor = 2;
@@ -33,7 +34,8 @@ const MainPage = () => {
       })
       .then(response => response.json())
       .then(data => {
-        console.log( userChoice +" "+ data.computer +" " + data.result);
+        console.log( userChoice +" "+ data.computer +" " + data.result +" "+data.chances + " " + data.stat);
+        if(data.stat === "proceed"){
           if(data.result === -1){
             setComputerScore(computerScore + 1);
           }
@@ -42,7 +44,14 @@ const MainPage = () => {
           }
           setUserMove(userChoice);
           setComputerMove(data.computer);
-          // data.computer -> computer's move
+          setChances(10 - data.chances);
+        }
+
+        else{
+          setChances(0);
+          //end the match
+        }
+          
         
       })
 
@@ -76,7 +85,8 @@ const MainPage = () => {
     <div className="main-page">
       <div className="game-container">
         <div className="game-section">
-        <div className="score-label">{userName}'s Score: {userScore}</div>
+        <div className="score-label">{userName}'s Score: {userScore} </div>
+        <div className="score-label">Chances : {chances} </div>
           <div className="user-gif">
 
           {userMove === -1 && <img src={userGif} alt="Rock" className="button-image" /> }
@@ -91,7 +101,7 @@ const MainPage = () => {
           
           {userMove === -1 && computerMove === -1 && <ChoiceButtons /> }
           {userMove !== -1 && computerMove !== -1 && <button className="game-button" onClick={reset}>
-          Proceed
+          Proceed 
         </button> }
         </div>
 

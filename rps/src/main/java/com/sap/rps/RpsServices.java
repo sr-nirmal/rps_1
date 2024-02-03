@@ -1,55 +1,78 @@
 package com.sap.rps;
 
+import java.io.*;
+
+import com.opencsv.CSVWriter;
+import com.opencsv.CSVReader;
+
+import java.io.FileReader;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
-
-
-// import com.mongodb.ConnectionString;
-// import com.mongodb.MongoClientSettings;
-// import com.mongodb.MongoException;
-// import com.mongodb.ServerApi;
-// import com.mongodb.ServerApiVersion;
-// import com.mongodb.client.MongoClient;
-// import com.mongodb.client.MongoClients;
-// import com.mongodb.client.MongoDatabase;
-// import com.mongodb.client.MongoCollection;
-// import com.mongodb.client.MongoDatabase;
-
-// import org.bson.Document;
+import java.util.Scanner;
 
 public class RpsServices{
 
     int rock = 0;
     int paper = 1;
     int scissor = 2;
+    String FILE_NAME = new String("databse.csv");
+    File fileObject;
 
     public RpsServices(){
-        // String connectionString = "mongodb+srv://deadshot:deadshot@cluster0.ptitmlu.mongodb.net/?retryWrites=true&w=majority";
-        
-        // ServerApi serverApi = ServerApi.builder()
-        //         .version(ServerApiVersion.V1)
-        //         .build();
-        // MongoClientSettings settings = MongoClientSettings.builder()
-        //         .applyConnectionString(new ConnectionString(connectionString))
-        //         .serverApi(serverApi)
-        //         .build();
-        // // Create a new client and connect to the server
-        // try (MongoClient mongoClient = MongoClients.create(settings)) {
-        //     try {
-        //         // Send a ping to confirm a successful connection
-        //         MongoDatabase database = mongoClient.getDatabase("admin");
-        //         database.runCommand(new Document("ping", 1));
-        //         System.out.println("Pinged your deployment. You successfully connected to MongoDB!");
-        //     } catch (MongoException e) {
-        //         e.printStackTrace();
-        //     }
-        // }
+        try {
+            this.fileObject = new File(FILE_NAME);
+            if (fileObject.createNewFile()) {
+                System.out.println("File created: " + fileObject.getName());
+            } 
+            else {
+                System.out.println("File already exists.");
+            }
+        } 
+        catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
 
+    }   
 
-        // MongoDatabase database = mongoClient.getDatabase("database_01");
-        // MongoCollection<Document> collection = database.getCollection("collection_03");
+    public List<RpsModel> init() throws Exception{
+        List<RpsModel> arr = new ArrayList<>();
+        try (CSVReader reader = new CSVReader(new FileReader(FILE_NAME))) {
+            String[] line;
+            while ((line = reader.readNext()) != null) {
+                String name = line[0];
+                String date = line[1];
+                int wins = Integer.parseInt(line[2]);
+                int loses = Integer.parseInt(line[3]);
+                int draws = Integer.parseInt(line[4]);
+                int score = Integer.parseInt(line[5]);
 
-        // Document document = new Document("name", "John Doe").append("age", 30);
-        // collection.insertOne(document);
+                if(arr.size() == 0){
+                    RpsModel temp1 = new RpsModel(name, 0, 0, 0);
+                    temp1.history.add(new MatchHistory(wins, loses, draws, score, date));
+                    arr.add(temp1);
+                }
+                else{
+                    for(RpsModel temp : arr){
+                        if(temp.name.equals(name)){
+                            temp.history.add(new MatchHistory(wins, loses, draws, score, date));
+                        }
+                        else{
+                            RpsModel temp1 = new RpsModel(name, 0, 0, 0);
+                            temp1.history.add(new MatchHistory(wins, loses, draws, score, date));
+                            arr.add(temp1);
+                        }
+                    }
+                }
+            }
+
+            System.out.println("Data read from CSV successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return arr;
     }
     
     private int getRandom(){
@@ -58,12 +81,12 @@ public class RpsServices{
         return (int) (rand_int%3);
     }
 
-    public int[o] check(int player){ // player win=1 ; draw=0 ; lose=-1
+    public int[] check(int player){ // player win=1 ; draw=0 ; lose=-1
         int computer;
         int[] Return = {0, 0} ;
         computer = this.getRandom();
         Return[1] = computer;
-        System.ut.println("play -> "+ player  + " " + computer);
+        System.out.println("play -> "+ player  + " " + computer);
         if(player == computer){
             Return[0] = 0;
         }
@@ -95,6 +118,29 @@ public class RpsServices{
             } 
         }
         return Return;
+    }
+
+    public void writeData(historyData data){ // name, date, wins, loses, draws, score
+        try (CSVWriter writer = new CSVWriter(new FileWriter(this.FILE_NAME))) {
+            
+            // String[] header = {"Name", "Date", "Wins", "Loses", "Draws", "Score"};
+            // writer.writeNext(header);
+            String[] writeData = {
+                data.name,
+                data.date,
+                    String.valueOf(data.wins),
+                    String.valueOf(data.loses),
+                    String.valueOf(data.draws),
+                    String.valueOf(data.score)
+            };
+            writer.writeNext(writeData);
+          
+
+            System.out.println("Data written to CSV successfully!");
+        } 
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
