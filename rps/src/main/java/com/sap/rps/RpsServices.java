@@ -58,12 +58,12 @@ public class RpsServices{
         return (int) (rand_int%3);
     }
 
-    public int[] check(int player){ // player win=1 ; draw=0 ; lose=-1
+    public int[o] check(int player){ // player win=1 ; draw=0 ; lose=-1
         int computer;
         int[] Return = {0, 0} ;
         computer = this.getRandom();
         Return[1] = computer;
-        System.out.println("play -> "+ player  + " " + computer);
+        System.ut.println("play -> "+ player  + " " + computer);
         if(player == computer){
             Return[0] = 0;
         }
