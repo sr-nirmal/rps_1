@@ -3,6 +3,7 @@ package com.sap.rps;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class RpsModel{
     
     public String name;
     public int wins, loses, draws;
-    public int chances = 0;
+    public int chances = 1;
 
     List<MatchHistory> history =  new ArrayList<>();
     

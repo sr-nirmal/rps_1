@@ -121,7 +121,7 @@ public class RpsServices{
     }
 
     public void writeData(historyData data){ // name, date, wins, loses, draws, score
-        try (CSVWriter writer = new CSVWriter(new FileWriter(this.FILE_NAME))) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(this.FILE_NAME, true))) {
             
             // String[] header = {"Name", "Date", "Wins", "Loses", "Draws", "Score"};
             // writer.writeNext(header);
