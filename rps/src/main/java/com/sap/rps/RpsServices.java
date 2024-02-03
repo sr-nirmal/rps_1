@@ -67,7 +67,7 @@ public class RpsServices{
                 }
             }
 
-            System.out.println("Data read from CSV successfully!");
+            System.out.println("data init....");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -136,7 +136,7 @@ public class RpsServices{
             writer.writeNext(writeData);
           
 
-            System.out.println("Data written to CSV successfully!");
+            System.out.println("data updated.....");
         } 
         catch (IOException e) {
             e.printStackTrace();
