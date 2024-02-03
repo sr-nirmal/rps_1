@@ -36,44 +36,55 @@ public class RpsServices{
 
     }   
 
-    public List<RpsModel> init() throws Exception{
-        List<RpsModel> arr = new ArrayList<>();
+    public ArrayList<RpsModel> init() throws Exception {
+        ArrayList<RpsModel> arr = new ArrayList<>();
         try (CSVReader reader = new CSVReader(new FileReader(FILE_NAME))) {
-            String[] line;
-            while ((line = reader.readNext()) != null) {
+            List<String[]> allLines = reader.readAll();
+    
+            for (String[] line : allLines) {
                 String name = line[0];
                 String date = line[1];
                 int wins = Integer.parseInt(line[2]);
                 int loses = Integer.parseInt(line[3]);
                 int draws = Integer.parseInt(line[4]);
                 int score = Integer.parseInt(line[5]);
-
-                if(arr.size() == 0){
+    
+                boolean found = false;
+    
+                for (RpsModel temp : arr) {
+                    if (temp.name.equals(name)) {
+                        temp.history.add(new MatchHistory(wins, loses, draws, score, date));
+                        found = true;
+                        System.out.println("Data adding in else if....." + name + " " + date + " " + wins + " " + loses);
+                        break;
+                    }
+                }
+    
+                if (!found) {
+                    // If not found, create a new RpsModel and add it to the list
                     RpsModel temp1 = new RpsModel(name, 0, 0, 0);
                     temp1.history.add(new MatchHistory(wins, loses, draws, score, date));
                     arr.add(temp1);
+                    System.out.println("Data adding in else....." + name + " " + date + " " + wins + " " + loses);
                 }
-                else{
-                    for(RpsModel temp : arr){
-                        if(temp.name.equals(name)){
-                            temp.history.add(new MatchHistory(wins, loses, draws, score, date));
-                        }
-                        else{
-                            RpsModel temp1 = new RpsModel(name, 0, 0, 0);
-                            temp1.history.add(new MatchHistory(wins, loses, draws, score, date));
-                            arr.add(temp1);
-                        }
-                    }
-                }
+    
+                System.out.println("data init....");
             }
-
-            System.out.println("data init....");
         } catch (IOException e) {
+            System.out.println("error.....");
             e.printStackTrace();
         }
-
+    
+        for (RpsModel printTemp : arr) {
+            System.out.println("users -> " + printTemp.name + " " + printTemp.wins + " " + printTemp.chances);
+            for (MatchHistory printTemp1 : printTemp.history) {
+                System.out.println("init -> " + printTemp1.wins + " " + printTemp1.loses + " " + printTemp1.draws + " " + printTemp1.date);
+            }
+        }
+    
         return arr;
     }
+    
     
     private int getRandom(){
         Random rand = new Random();

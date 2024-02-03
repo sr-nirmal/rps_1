@@ -16,6 +16,7 @@ class MatchHistory{
         this.draws = draws;
         this.score = score;
         this.date = date;
+        System.out.println("new match history created..."+score);
     }
 }
 
@@ -26,13 +27,14 @@ public class RpsModel{
     public int wins, loses, draws;
     public int chances = 1;
 
-    List<MatchHistory> history =  new ArrayList<>();
+    List<MatchHistory> history ;
     
 
     public RpsModel(String name, int wins, int loses, int draws){
         this.name = name;
         this.wins = wins;
         this.loses = loses;
+        this.history = new ArrayList<>();
     }
 
     public String updateScore(){

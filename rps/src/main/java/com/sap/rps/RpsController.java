@@ -78,17 +78,18 @@ public class RpsController {
 	List<RpsModel> arr;
 
 	public RpsController(){
+		System.out.println("init......");
 		try{
 			this.arr = services.init();
 		}
 		catch(Exception e){}
 		
-		for(RpsModel printTemp : arr){
-			System.out.println(printTemp.name +" "+ printTemp.wins +" "+ printTemp.chances);
-			for(MatchHistory temp1 : printTemp.history){
-				System.out.println("init -> " + temp1.wins+ " " + temp1.loses+ " " + temp1.draws+ " " + temp1.date);
-			}
-		}
+		// for(RpsModel printTemp : this.arr){
+		// 	System.out.println(printTemp.name +" "+ printTemp.wins +" "+ printTemp.chances);
+		// 	for(MatchHistory temp1 : printTemp.history){
+		// 		System.out.println("init -> " + temp1.wins+ " " + temp1.loses+ " " + temp1.draws+ " " + temp1.date);
+		// 	}
+		// }
 
 	}
 	
