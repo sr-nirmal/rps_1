@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './MainPage.css';
-import rockImage from '../images/rock_left.png';
-import paperImage from '../images/paper_left.png';
-import scissorsImage from '../images/scissors_left.png';
+import rockImageL from '../images/rock_left.png';
+import paperImageL from '../images/paper_left.png';
+import scissorsImageL from '../images/scissors_left.png';
+import rockImageR from '../images/rock_right.png';
+import paperImageR from '../images/paper_right.png';
+import scissorsImageR from '../images/scissors_right.png';
 import userGif from '../images/user_animation.gif';
 import computerGif from '../images/computer_animation.gif';
 
@@ -23,8 +26,6 @@ const MainPage = () => {
 
   const handleUserChoice = (userChoice) => {
     console.log(userChoice);
-    // Add game logic here based on userChoice and computer's choice
-    // Update userScore and computerScore accordingly
     fetch('http://localhost:8080/play', {
       method: 'PUT',
       headers: {
@@ -63,21 +64,35 @@ const MainPage = () => {
     setUserMove(-1);
     setComputerMove(-1);
   }
+
   function ChoiceButtons(){
     return(
       <div className="buttons-container">
         <button className="game-button" onClick={() => handleUserChoice(rock)}>
-          <img src={rockImage} alt="Rock" className="button-image" />
+          <img src={rockImageL} alt="Rock" className="button-image" />
         </button>
         <button className="game-button" onClick={() => handleUserChoice(paper)}>
-          <img src={paperImage} alt="Paper" className="button-image" />
+          <img src={paperImageL} alt="Paper" className="button-image" />
         </button>
         <button className="game-button" onClick={() => handleUserChoice(scissor)}>
-          <img src={scissorsImage} alt="Scissors" className="button-image" />
+          <img src={scissorsImageL} alt="Scissors" className="button-image" />
         </button>
         
       </div>
     );
+  }
+
+  function ResultPopup(){
+  return(
+    <div className='result-box'>
+      <div className='box'>
+          this is popup
+          <button className="game-button" onClick={reset}>Proceed</button>
+      </div>
+
+    </div>
+  )
+
   }
 
 
@@ -90,19 +105,17 @@ const MainPage = () => {
           <div className="user-gif">
 
           {userMove === -1 && <img src={userGif} alt="Rock" className="button-image" /> }
-          {userMove === 0 && <img src={rockImage} alt="Rock" className="button-image" /> }
-          {userMove === 1 && <img src={paperImage} alt="Rock" className="button-image" /> }
-          {userMove === 2 && <img src={scissorsImage} alt="Rock" className="button-image" /> }
+          {userMove === 0 && <img src={rockImageL} alt="Rock" className="button-image" /> }
+          {userMove === 1 && <img src={paperImageL} alt="Paper" className="button-image" /> }
+          {userMove === 2 && <img src={scissorsImageL} alt="Scissors" className="button-image" /> }
           
 
 
 
           </div>
           
-          {userMove === -1 && computerMove === -1 && <ChoiceButtons /> }
-          {userMove !== -1 && computerMove !== -1 && <button className="game-button" onClick={reset}>
-          Proceed 
-        </button> }
+          <ChoiceButtons /> 
+          
         </div>
 
         <div className="divider"></div>
@@ -112,14 +125,15 @@ const MainPage = () => {
           <div className="computer-gif">
 
           {computerMove === -1 && <img src={computerGif} alt="Rock" className="button-image" />}
-          {computerMove === 0 && <img src={rockImage} alt="Rock" className="button-image" />}
-          {computerMove === 1 && <img src={paperImage} alt="Rock" className="button-image" />}
-          {computerMove === 2 && <img src={scissorsImage} alt="Rock" className="button-image" />}
+          {computerMove === 0 && <img src={rockImageR} alt="Rock" className="button-image" />}
+          {computerMove === 1 && <img src={paperImageR} alt="Rock" className="button-image" />}
+          {computerMove === 2 && <img src={scissorsImageR} alt="Rock" className="button-image" />}
           
           </div>
           
         </div>
       </div>
+      {userMove !== -1 && computerMove !== -1 && <ResultPopup/>}
     </div>
   );
 };
