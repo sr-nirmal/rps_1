@@ -23,8 +23,11 @@ const MainPage = () => {
   const rock = 0;
   const paper = 1;
   const scissor = 2;
+  const [showResultPopup, setShowResultPopup] = useState(false);
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   const handleUserChoice = (userChoice) => {
+    setButtonDisabled(true);
     console.log(userChoice);
     fetch('http://localhost:8080/play', {
       method: 'PUT',
@@ -59,22 +62,31 @@ const MainPage = () => {
       .catch(error => {
           console.error('Error:', error);
       });
+
+
+      setTimeout(() => {
+        setShowResultPopup(true);
+      }, 1000);
+
   };
+  
   function reset(){
     setUserMove(-1);
     setComputerMove(-1);
+    setShowResultPopup(false);
+    setButtonDisabled(false);
   }
 
   function ChoiceButtons(){
     return(
       <div className="buttons-container">
-        <button className="game-button" onClick={() => handleUserChoice(rock)}>
+        <button className="game-button" onClick={() => handleUserChoice(rock)} disabled={isButtonDisabled}>
           <img src={rockImageL} alt="Rock" className="button-image" />
         </button>
-        <button className="game-button" onClick={() => handleUserChoice(paper)}>
+        <button className="game-button" onClick={() => handleUserChoice(paper)} disabled={isButtonDisabled} >
           <img src={paperImageL} alt="Paper" className="button-image" />
         </button>
-        <button className="game-button" onClick={() => handleUserChoice(scissor)}>
+        <button className="game-button" onClick={() => handleUserChoice(scissor)} disabled={isButtonDisabled}>
           <img src={scissorsImageL} alt="Scissors" className="button-image" />
         </button>
         
@@ -86,7 +98,7 @@ const MainPage = () => {
   return(
     <div className='result-box'>
       <div className='box'>
-          this is popup
+          
           <button className="game-button" onClick={reset}>Proceed</button>
       </div>
 
@@ -133,7 +145,7 @@ const MainPage = () => {
           
         </div>
       </div>
-      {userMove !== -1 && computerMove !== -1 && <ResultPopup/>}
+      {userMove !== -1 && computerMove !== -1 && showResultPopup && <div className='result-box'/>&& <ResultPopup/> }
     </div>
   );
 };
