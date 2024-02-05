@@ -158,7 +158,7 @@ public class RpsController {
 		return (new Result(Computer, Result, "finish", chances));
 	}
 
-	@GetMapping("/history")
+	@PutMapping("/history")
 	public List<MatchHistory> getHistory(@RequestBody NameReq Name) {
 		RpsModel temp1 = null;
 		for (RpsModel temp : arr){
