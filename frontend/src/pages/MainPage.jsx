@@ -27,7 +27,6 @@ const MainPage = () => {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const[resultState,setResultState]=useState(2)
   const[historyArray, setHistory] = useState([]);
-  const prevHistory = [];
 
 
   const handleUserChoice = (userChoice) => {
@@ -85,6 +84,7 @@ const MainPage = () => {
   };
 
   function fetchHistory(){
+    console.log("hello.....")
     fetch('http://localhost:8080/history', {
       method: 'PUT',
       headers: {
@@ -101,28 +101,25 @@ const MainPage = () => {
         // console.log("tempData----------")
         // console.log(tempData)
         // console.log(historyArray);
-        // test for commit 
-        // test for commit 
+        // console.log(data)
         
+        setHistory(data);
+        console.log(historyArray);
+        tempPrint();
 
-        for (let i = 0; i < data.length; i++) {
-          const newData = data[i];
-    
-          // Use a callback form of setHistory to ensure you are working with the latest state
-          setHistory(historyArray => [...historyArray, newData]);
-    
-          // Log the updated historyArray after each iteration
-          
-        }
-        console.log("Updated historyArray:", historyArray);
-          
-        
+
+  
       })
 
       .catch(error => {
           console.error('Error:', error);
       });
 
+  }
+  function tempPrint(){
+    for( const temp of historyArray){
+      console.log(temp);
+    }
   }
   
   function reset(){
@@ -167,21 +164,59 @@ const MainPage = () => {
 
   }
 
-  function historyDisplay(){
+  function HistoryDisplay(){
 
     return(
       <div>
+        <button onClick={fetchHistory}>Fetch</button>
+        <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+      <div style={{ display: 'flex', marginBottom: '10px' }}>
+        <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
+          <strong>Wins</strong>
+        </div>
+        <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
+          <strong>Loses</strong>
+        </div>
+        <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
+          <strong>Draws</strong>
+        </div>
+        <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
+          <strong>Score</strong>
+        </div>
+        <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
+          <strong>Date</strong>
+        </div>
+      </div>
+
+      {historyArray.map((item, index) => (
+        <div key={index} style={{ display: 'flex', marginBottom: '10px' }}>
+          <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
+            {item.wins}
+          </div>
+          <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
+            {item.loses}
+          </div>
+          <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
+            {item.draws}
+          </div>
+          <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
+            {item.score}
+          </div>
+          <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
+            {item.date}
+          </div>
+        </div>
+      ))}
+    </div>
 
       </div>
     );
   }
-  useEffect(() => {
-    fetchHistory();
-    
-  }, []);
+ 
 
   return (
     <div className="main-page">
+      <HistoryDisplay />
       <div className="game-container">
         <div className="game-section">
         <div className="score-label">{userName}'s Score: {userScore} </div>
