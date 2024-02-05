@@ -1,5 +1,5 @@
 // MainPage.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './MainPage.css';
@@ -53,7 +53,7 @@ const MainPage = () => {
 
         else{
           setChances(0);
-          //end the match
+          fetchHistory();
         }
           
         
@@ -69,6 +69,27 @@ const MainPage = () => {
       }, 1000);
 
   };
+
+  const fetchHistory = () =>{
+    fetch('http://localhost:8080/history', {
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ "name": userName})
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+          
+        
+      })
+
+      .catch(error => {
+          console.error('Error:', error);
+      });
+
+  }
   
   function reset(){
     setUserMove(-1);
@@ -106,7 +127,9 @@ const MainPage = () => {
   )
 
   }
-
+  useEffect(() => {
+    fetchHistory();
+  }, []);
 
   return (
     <div className="main-page">

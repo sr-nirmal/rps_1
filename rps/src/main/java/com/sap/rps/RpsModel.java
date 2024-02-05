@@ -25,7 +25,7 @@ public class RpsModel{
     
     public String name;
     public int wins, loses, draws;
-    public int chances = 1;
+    public int chances = 0;
 
     List<MatchHistory> history ;
     

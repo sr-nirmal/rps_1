@@ -105,6 +105,7 @@ public class RpsController {
 				temp.wins = 0;
 				temp.loses = 0;
 				temp.draws = 0;
+				temp.chances = 0;
 				return new Response("Success");
 			}
 		}
@@ -157,7 +158,7 @@ public class RpsController {
 		return (new Result(Computer, Result, "finish", chances));
 	}
 
-	@GetMapping("/history")
+	@PutMapping("/history")
 	public List<MatchHistory> getHistory(@RequestBody NameReq Name) {
 		RpsModel temp1 = null;
 		for (RpsModel temp : arr){
