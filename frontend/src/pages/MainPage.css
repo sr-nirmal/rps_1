@@ -114,10 +114,9 @@
   margin: 20px;
   display: flex;
   flex-direction: column;
-  align-content: center;
   flex-wrap: wrap;
-  justify-content: space-evenly;
   white-space: nowrap;
+  align-items: center;
   
 
 }
@@ -158,13 +157,13 @@
   border: none;
   padding: 5px;
   font-size: 31px;
-  height: 3vh;
+  height: 10vh;
   width: 20vb;
   box-shadow: 0 2px 4px darkslategray;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-left: 6.5vh;
-  
+ 
+
 }
 
 .proceed-button:active {
@@ -179,7 +178,7 @@
 }
 
 .round-4 {
-  border-radius: 30%;
+  border-radius: 60px;
 }
 
 .you-win-text{
