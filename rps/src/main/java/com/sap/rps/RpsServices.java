@@ -56,7 +56,7 @@ public class RpsServices{
                     if (temp.name.equals(name)) {
                         temp.history.add(new MatchHistory(wins, loses, draws, score, date));
                         found = true;
-                        System.out.println("Data adding in else if....." + name + " " + date + " " + wins + " " + loses);
+                        // System.out.println("Data adding in else if....." + name + " " + date + " " + wins + " " + loses);
                         break;
                     }
                 }
@@ -66,10 +66,10 @@ public class RpsServices{
                     RpsModel temp1 = new RpsModel(name, 0, 0, 0);
                     temp1.history.add(new MatchHistory(wins, loses, draws, score, date));
                     arr.add(temp1);
-                    System.out.println("Data adding in else....." + name + " " + date + " " + wins + " " + loses);
+                    // System.out.println("Data adding in else....." + name + " " + date + " " + wins + " " + loses);
                 }
     
-                System.out.println("data init....");
+                
             }
         } catch (IOException e) {
             System.out.println("error.....");
@@ -77,6 +77,7 @@ public class RpsServices{
         }
     
         for (RpsModel printTemp : arr) {
+            System.out.println("data init....");
             System.out.println("users -> " + printTemp.name + " " + printTemp.wins + " " + printTemp.chances);
             for (MatchHistory printTemp1 : printTemp.history) {
                 System.out.println("init -> " + printTemp1.wins + " " + printTemp1.loses + " " + printTemp1.draws + " " + printTemp1.date);

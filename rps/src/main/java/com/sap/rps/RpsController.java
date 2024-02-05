@@ -100,7 +100,7 @@ public class RpsController {
 	@PutMapping("/start")
 	public Response start(@RequestBody NameReq Name) {
 		System.out.println(Name.name);
-		for (RpsModel temp : arr){
+		for (RpsModel temp : this.arr){
 			System.out.println(temp.name +" "+ Name.name);
 			if(temp.name.equals(Name.name)){
 				temp.wins = 0;
@@ -110,8 +110,8 @@ public class RpsController {
 				return new Response("Success");
 			}
 		}
-		arr.add(new RpsModel(Name.name, 0, 0, 0));
-		for (RpsModel printTemp : arr){
+		this.arr.add(new RpsModel(Name.name, 0, 0, 0));
+		for (RpsModel printTemp : this.arr){
 			System.out.println(printTemp.name +" "+ printTemp.wins +" "+ printTemp.chances);
 		}
 		return new Response("Success");
@@ -142,7 +142,7 @@ public class RpsController {
 						if(Result == 0){temp.draws++;}
 						if(Result == -1){temp.loses++;}
 						if(Result ==  1){temp.wins++;}
-						chances = temp.chances++ ;
+						chances = ++temp.chances ;
 						break;
 				}
 			}
