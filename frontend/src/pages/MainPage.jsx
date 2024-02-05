@@ -80,13 +80,13 @@ const MainPage = () => {
   function ChoiceButtons(){
     return(
       <div className="buttons-container">
-        <button className="game-button" onClick={() => handleUserChoice(rock)} disabled={isButtonDisabled}>
+        <button className="game-button round-4" onClick={() => handleUserChoice(rock)} disabled={isButtonDisabled}>
           <img src={rockImageL} alt="Rock" className="button-image" />
         </button>
-        <button className="game-button" onClick={() => handleUserChoice(paper)} disabled={isButtonDisabled} >
+        <button className="game-button round-4" onClick={() => handleUserChoice(paper)} disabled={isButtonDisabled} >
           <img src={paperImageL} alt="Paper" className="button-image" />
         </button>
-        <button className="game-button" onClick={() => handleUserChoice(scissor)} disabled={isButtonDisabled}>
+        <button className="game-button round-4" onClick={() => handleUserChoice(scissor)} disabled={isButtonDisabled}>
           <img src={scissorsImageL} alt="Scissors" className="button-image" />
         </button>
         
@@ -116,10 +116,10 @@ const MainPage = () => {
         <div className="score-label">Chances : {chances} </div>
           <div className="user-gif">
 
-          {userMove === -1 && <img src={userGif} alt="Rock" className="button-image" /> }
-          {userMove === 0 && <img src={rockImageL} alt="Rock" className="button-image" /> }
-          {userMove === 1 && <img src={paperImageL} alt="Paper" className="button-image" /> }
-          {userMove === 2 && <img src={scissorsImageL} alt="Scissors" className="button-image" /> }
+          {userMove === -1 && <img src={userGif} alt="Rock" className=".output-image" /> }
+          {userMove === 0 && <img src={rockImageL} alt="Rock" className=".output-image" /> }
+          {userMove === 1 && <img src={paperImageL} alt="Paper" className=".output-image" /> }
+          {userMove === 2 && <img src={scissorsImageL} alt="Scissors" className=".output-image" /> }
           
 
 
@@ -131,18 +131,21 @@ const MainPage = () => {
         </div>
 
         <div className="divider"></div>
+        <div className="computer-side">
+          <div className="computer-gap"></div>
+          <div className="game-section">
+            <div className="score-label">Computer Score: {computerScore}</div>
+            <div className="score-space"> </div>
+            <div className="computer-gif">
 
-        <div className="game-section">
-          <div className="score-label">Computer Score: {computerScore}</div>
-          <div className="computer-gif">
-
-          {computerMove === -1 && <img src={computerGif} alt="Rock" className="button-image" />}
-          {computerMove === 0 && <img src={rockImageR} alt="Rock" className="button-image" />}
-          {computerMove === 1 && <img src={paperImageR} alt="Rock" className="button-image" />}
-          {computerMove === 2 && <img src={scissorsImageR} alt="Rock" className="button-image" />}
-          
+            {computerMove === -1 && <img src={computerGif} alt="Rock" className=".output-image" />}
+            {computerMove === 0 && <img src={rockImageR} alt="Rock" className=".output-image" />}
+            {computerMove === 1 && <img src={paperImageR} alt="Rock" className="output-image" />}
+            {computerMove === 2 && <img src={scissorsImageR} alt="Rock" className=".output-image" />}
+            
+            </div>
+            
           </div>
-          
         </div>
       </div>
       {userMove !== -1 && computerMove !== -1 && showResultPopup && <div className='result-box'/>&& <ResultPopup/> }

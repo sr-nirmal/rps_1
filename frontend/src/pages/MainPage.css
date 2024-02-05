@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 }
 
 .game-container {
@@ -17,7 +18,7 @@
 
 .divider {
   width: 3px;
-  height: 70vh; /* Adjust the height of the divider */
+  height: 80vh; /* Adjust the height of the divider */
   background-color: #000000; /* Black color for the divider */
   margin: 0 20px;
 }
@@ -48,6 +49,9 @@
   gap: 10px;
 }
 
+.score-space{
+  height: 50px;;
+}
 .game-button {
   width: 130px;
   height: auto;
@@ -61,6 +65,19 @@
 .button-image {
   width: 100%;
   height: 100%;
+}
+
+.output-image{
+  width: 320px;
+  height: 320px;
+}
+.computer-side{
+  display: flex;
+  flex-direction: row;
+}
+
+.computer-gap{
+  width: 20px;
 }
 
 .result-box{
@@ -89,3 +106,31 @@
 }
 
 
+
+.game-section button {
+  background-color: #29b5e5;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 31px;
+  height: 130px;
+  width: 130px;
+  box-shadow: 0 2px 4px darkslategray;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.game-section button:active {
+  background-color: #29b5e5;
+  box-shadow: 0 0 2px darkslategray;
+  transform: translateY(2px);
+}
+
+.game-section button:hover{
+  box-shadow: 1px 1px 10px darkslategray;
+  transition: all 0.2s ease;
+}
+
+.round-4 {
+  border-radius: 30%;
+}
