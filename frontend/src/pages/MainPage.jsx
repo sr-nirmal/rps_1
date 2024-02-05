@@ -25,6 +25,8 @@ const MainPage = () => {
   const scissor = 2;
   const [showResultPopup, setShowResultPopup] = useState(false);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const[resultState,setResultState]=useState(2)
+
 
   const handleUserChoice = (userChoice) => {
     setButtonDisabled(true);
@@ -52,11 +54,20 @@ const MainPage = () => {
         }
 
         else{
+          if(data.result === -1){
+            setComputerScore(computerScore + 1);
+          }
+          else if(data.result === 1){
+            setUserScore(userScore + 1);
+          }
+          setUserMove(userChoice);
+          setComputerMove(data.computer);
           setChances(0);
+          
           fetchHistory();
           // test
         }
-          
+        setResultState(data.result);
         
       })
 
@@ -120,10 +131,13 @@ const MainPage = () => {
 
   function ResultPopup(){
   return(
-    <div className='result-box'>
-      <div className='box'>
-          
-          <button className="game-button" onClick={reset}>Proceed</button>
+    <div className='result-box' >
+      <div className='box' >
+      {resultState===-1 && <h1 className="you-win-text" data-text="YOU LOSE">YOU LOSE</h1>}
+      {resultState===0 && <h1 className="you-win-text" data-text="DRAW">DRAW</h1>}
+      {resultState===1 && <h1 className="you-win-text" data-text="YOU WIN">YOU WIN</h1>}
+     
+          <button className="proceed-button round-4" onClick={reset}>Proceed</button>
       </div>
 
     </div>

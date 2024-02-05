@@ -1,4 +1,7 @@
 
+*{
+  font-family: 'Poppins',sans-serif;
+}
 .main-page {
   background-color: #29b5e5;
   background-size: cover;
@@ -103,13 +106,19 @@
 }
 
 .box{
-  position: relative;
-  width: 50%;
-  height: 50%;
+  width: 70vb;
+  height: 50vh;
   background-color: #29b5e5;
-  border:1px solid #999;
-  border-radius: 4px;
-  margin:20px;
+  border: 1px solid #999;
+  border-radius: 20%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  white-space: nowrap;
+  
 
 }
 
@@ -141,4 +150,70 @@
 
 .round-4 {
   border-radius: 30%;
+}
+
+.proceed-button {
+  background-color: #29b5e5;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 31px;
+  height: 3vh;
+  width: 20vb;
+  box-shadow: 0 2px 4px darkslategray;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 6.5vh;
+  
+}
+
+.proceed-button:active {
+  background-color: #29b5e5;
+  box-shadow: 0 0 2px darkslategray;
+  transform: translateY(2px);
+}
+
+.proceed-button:hover{
+  box-shadow: 1px 1px 10px darkslategray;
+  transition: all 0.2s ease;
+}
+
+.round-4 {
+  border-radius: 30%;
+}
+
+.you-win-text{
+  position: relative;
+  font-size: 7vw;
+  color: #29b5e5;
+  -webkit-text-stroke: 0.3vw #34a1c6;
+  
+}
+
+.you-win-text::before
+{
+  content:attr(data-text);
+  position: absolute;
+  top:0;
+  left:0;
+  width:0%;
+  height:100%;
+  color: #143ae0;
+  -webkit-text-stroke: 0vw #34a1c6;
+  border-right: 2px solid #095dcb;
+  overflow: hidden;
+  animation: animate 3s linear infinite;
+}
+
+@keyframes animate
+{
+  0%,100%
+  {
+    width:0%
+  }
+  70%,90%
+  {
+    width:100%
+  }
+
 }
