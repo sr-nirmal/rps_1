@@ -27,6 +27,8 @@ const MainPage = () => {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const[resultState,setResultState]=useState(2)
   const[historyArray, setHistory] = useState([]);
+  const [refreshHistory, setRefreshHistory] = useState(1);
+
 
 
   const handleUserChoice = (userChoice) => {
@@ -94,14 +96,7 @@ const MainPage = () => {
       })
       .then(response => response.json())
       .then(data => {
-        // console.log(data)
-        // console.log("----------")
-        // const tempData = data;
-        // setHistory(tempData);
-        // console.log("tempData----------")
-        // console.log(tempData)
-        // console.log(historyArray);
-        // console.log(data)
+    
         
         setHistory(data);
         console.log(historyArray);
@@ -168,7 +163,7 @@ const MainPage = () => {
 
     return(
       <div>
-        <button onClick={fetchHistory}>Fetch</button>
+        {/* <button onClick={fetchHistory}>Fetch</button> */}
         <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
       <div style={{ display: 'flex', marginBottom: '10px' }}>
         <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
@@ -211,6 +206,11 @@ const MainPage = () => {
 
       </div>
     );
+  }
+
+  if(refreshHistory === 1){
+    fetchHistory();
+    setRefreshHistory(0);
   }
  
 

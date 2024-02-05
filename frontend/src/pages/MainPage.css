@@ -8,11 +8,11 @@
   background-position: center;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: row;
+  column-gap: 20vb;
 }
-
 .game-container {
   padding: 20px;
   display: flex;
