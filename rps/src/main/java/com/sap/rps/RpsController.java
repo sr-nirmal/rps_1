@@ -131,6 +131,7 @@ public class RpsController {
 						date = temp.updateScore();
 						services.writeData(new historyData(temp.name, date, temp.wins, temp.loses, temp.draws));
 						chances =  temp.chances;
+						temp.chances = 0;
 						break;
 					}
 					else{
