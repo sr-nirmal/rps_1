@@ -27,7 +27,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #ffffff; 
+  color: #ffffff;
+  width:45vb; 
+  height:70vh;
 }
 
 .score-label {
@@ -37,10 +39,14 @@
 
 .user-gif{
   margin-top: 100px;
+  height:28vh;
 }
 
 .computer-gif{
   margin-top: 100px;
+}
+.button-box{
+  margin-top: 1.5rem;
 }
 
 .buttons-container {
@@ -74,6 +80,8 @@
 .computer-side{
   display: flex;
   flex-direction: row;
+  width:45vb; 
+  height:70vh;
 }
 
 .computer-gap{

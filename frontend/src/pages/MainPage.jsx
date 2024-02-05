@@ -101,6 +101,7 @@ const MainPage = () => {
 
   function ChoiceButtons(){
     return(
+      <div className='button-box'>
       <div className="buttons-container">
         <button className="game-button round-4" onClick={() => handleUserChoice(rock)} disabled={isButtonDisabled}>
           <img src={rockImageL} alt="Rock" className="button-image" />
@@ -112,6 +113,7 @@ const MainPage = () => {
           <img src={scissorsImageL} alt="Scissors" className="button-image" />
         </button>
         
+      </div>
       </div>
     );
   }
