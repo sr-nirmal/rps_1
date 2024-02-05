@@ -105,6 +105,7 @@ public class RpsController {
 				temp.wins = 0;
 				temp.loses = 0;
 				temp.draws = 0;
+				temp.chances = 0;
 				return new Response("Success");
 			}
 		}
