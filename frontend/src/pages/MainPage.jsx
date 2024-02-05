@@ -26,6 +26,8 @@ const MainPage = () => {
   const [showResultPopup, setShowResultPopup] = useState(false);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const[resultState,setResultState]=useState(2)
+  const[historyArray, setHistory] = useState([]);
+  const prevHistory = [];
 
 
   const handleUserChoice = (userChoice) => {
@@ -82,7 +84,7 @@ const MainPage = () => {
 
   };
 
-  const fetchHistory = () =>{
+  function fetchHistory(){
     fetch('http://localhost:8080/history', {
       method: 'PUT',
       headers: {
@@ -92,7 +94,24 @@ const MainPage = () => {
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        // console.log(data)
+        // console.log("----------")
+        // const tempData = data;
+        // setHistory(tempData);
+        // console.log("tempData----------")
+        // console.log(tempData)
+        // console.log(historyArray);
+
+        for (let i = 0; i < data.length; i++) {
+          const newData = data[i];
+    
+          // Use a callback form of setHistory to ensure you are working with the latest state
+          setHistory(historyArray => [...historyArray, newData]);
+    
+          // Log the updated historyArray after each iteration
+          
+        }
+        console.log("Updated historyArray:", historyArray);
           
         
       })
@@ -144,8 +163,18 @@ const MainPage = () => {
   )
 
   }
+
+  function historyDisplay(){
+
+    return(
+      <div>
+
+      </div>
+    );
+  }
   useEffect(() => {
     fetchHistory();
+    
   }, []);
 
   return (
