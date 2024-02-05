@@ -54,6 +54,7 @@ const MainPage = () => {
         else{
           setChances(0);
           fetchHistory();
+          // test
         }
           
         
