@@ -3,7 +3,7 @@ import React from 'react';
 import videoSource from '../images/test1.mp4'; // Import the video source
 import win from '../images/win.mp4'
 import lose from '../images/lose.mp4'
-// import draw from '../images/draw.mp4'
+import draw from '../images/draw.mp4'
 import './InstructionsPopup.css';
 
 const InstructionManual = () => {
@@ -75,10 +75,10 @@ const InstructionsPopup = ({ onClose }) => {
             <source src={lose} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          {/* <video autoPlay loop muted>
+          <video autoPlay loop muted>
             <source src={draw} type="video/mp4" />
             Your browser does not support the video tag.
-          </video> */}
+          </video>
         </div>
         {/* <button onClick={onClose}>Close</button> Close button inside the popup */}
       </div>

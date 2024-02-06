@@ -52,17 +52,7 @@
     border-color: white;
   }
   
-  button {
-    display: block;
-    margin: 20px auto 0;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+  
   
   button:hover {
     background-color: #0056b3;
