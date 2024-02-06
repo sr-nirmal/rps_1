@@ -127,10 +127,14 @@ public class RpsController {
 			
 			
 				if(temp.name.equals(Play.name)){
-					if(temp.chances >= MAX_CHANCES){
+					if(temp.chances >= MAX_CHANCES - 1){
+						System.out.println("Chances at if --> "+temp.chances);
 						date = temp.updateScore();
 						services.writeData(new historyData(temp.name, date, temp.wins, temp.loses, temp.draws));
-						chances =  temp.chances;
+						chances =  MAX_CHANCES;
+						temp.wins = 0;
+						temp.loses = 0;
+						temp.draws = 0;
 						temp.chances = 0;
 						break;
 					}
@@ -155,6 +159,7 @@ public class RpsController {
 		// 	System.out.println("---------------");
 		// }
 		if(chances < MAX_CHANCES){
+			System.out.println("chances ---> "+ chances);
 			return (new Result(Computer,Result,"proceed", chances));
 		}
 		return (new Result(Computer, Result, "finish", chances));
