@@ -4,24 +4,54 @@
 }
 .main-page {
   background-color: #29b5e5;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
-  column-gap: 20vb;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    column-gap: 20vb;
+    align-items: center;
 }
-.game-container {
+
+.score-label {
+  font-size: 1.5rem;
+  margin-bottom: 4vh;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  height:7%;
+}
+
+.label-style{
+  
+  color: #fff;
+  white-space: nowrap;
+  text-transform: capitalize;
+  font-family: sans-serif;
+  letter-spacing: 0.1em;
+  transition: 0.3s;
+  text-shadow: 1px 1px 0 grey, 1px 2px 0 grey, 1px 3px 0 grey, 1px 4px 0 grey,
+    1px 5px 0 grey,
+    5px 13px 15px black;
+
+    
+}
+.chance-label
+{
+  height:10%;
+  font-size: 1.5rem;
+}
+  
+  
+  .game-container {
   padding: 20px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .divider {
   width: 3px;
-  height: 80vh; /* Adjust the height of the divider */
+  height: 40vh; /* Adjust the height of the divider */
   background-color: #000000; /* Black color for the divider */
   margin: 0 20px;
 }
@@ -35,25 +65,23 @@
   height:70vh;
 }
 
-.score-label {
-  font-size: 1.5rem;
-  margin-bottom: 4vh;
-}
+
 
 .user-gif{
-  margin-top: 10vh;
-  height:28vh;
+  width: 45vb;
+    height: 40vh;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .computer-gif{
-  margin-top: 10vh;
-}
-.button-box{
-  margin-top: 1.5rem;
+  display: flex;
+  width: 45vb;
+  height: 40vh;
+  justify-content: flex-end;
 }
 
 .buttons-container {
-  margin-top: 7vh;
   display: flex;
   gap: 1vh;
 }
@@ -62,12 +90,10 @@
   height: 5vh;;
 }
 
-
 .button-image {
   width: 100%;
   height: 100%;
 }
-
 .output-image{
   width: 32vh;
   height: 32vh;
@@ -82,6 +108,10 @@
 .computer-gap{
   width: 2vh;
 }
+
+
+
+
 
 .result-box{
   display: flex;
@@ -109,17 +139,16 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  white-space: nowrap;
   align-items: center;
   justify-content: space-evenly;
-  gap: 2rem;
   padding-bottom: 1rem;
+  font-size: 1.5rem;
 
 }
 
 
 
-.game-section button {
+.game-button {
   background-color: #29b5e5;
   color: white;
   border: none;
@@ -132,13 +161,13 @@
   transition: all 0.2s ease;
 }
 
-.game-section button:active {
+.game-button:active {
   background-color: #29b5e5;
   box-shadow: 0 0 2px darkslategray;
   transform: translateY(2px);
 }
 
-.game-section button:hover{
+.game-button:hover{
   box-shadow: 1px 1px 10px darkslategray;
   transition: all 0.2s ease;
 }
@@ -177,15 +206,34 @@
   border-radius: 60px;
 }
 
+
+.result-container{
+  height:14%;
+  display:flex;
+  align-items: center;
+  ;
+}
+
+.result-label{
+  top:0;
+  left: 0;
+  white-space: nowrap;
+}
+
+.label-size
+{
+ 
+}
+
 .you-win-text{
   position: relative;
     font-size: 7vw;
     color: #29b5e5;
     -webkit-text-stroke: 0.3vw #34a1c6;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+  
   
 }
+
 
 .you-win-text::before
 {
@@ -198,8 +246,9 @@
   color: #143ae0;
   -webkit-text-stroke: 0vw #34a1c6;
   border-right: 2px solid #095dcb;
+ 
   overflow: hidden;
-  animation: animate 3s linear infinite;
+  animation: animate 2s linear infinite;
 }
 
 @keyframes animate
@@ -208,9 +257,62 @@
   {
     width:0%
   }
-  70%,90%
+  40%,70%,90%
   {
     width:100%
   }
 
+}
+
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #f0f8ff; /* Light Blue */
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.table-header {
+  display: flex;
+  margin-bottom: 10px;
+  background-color: #4682b4; /* Steel Blue */
+  color: #fff; /* White */
+  border-radius: 5px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table-cell, .date-column {
+  flex: 1;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.date-column {
+  flex: 3; /* Adjusted width for the date column */
+}
+
+.table-row {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+/* Smooth Scrollbar */
+.table-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background-color: #d3eaf6; /* Light Sky Blue */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #4a90e2; /* Dodger Blue */
+  border-radius: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #4169e1; /* Royal Blue */
 }

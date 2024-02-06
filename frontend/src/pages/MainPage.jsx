@@ -19,7 +19,7 @@ const MainPage = () => {
   const [computerScore, setComputerScore] = useState(0);
   const [userMove, setUserMove] = useState(-1);
   const [computerMove, setComputerMove] = useState(-1);
-  const [chances, setChances] = useState(10);
+  const [chances, setChances] = useState(1);
   const rock = 0;
   const paper = 1;
   const scissor = 2;
@@ -74,9 +74,15 @@ const MainPage = () => {
           // setFinal(1);
           // test
         }
-        if(chances === 1){
-          setFinal(1);
+        if(chances === 10){
+          setTimeout(() => {
+        setFinal(1);
+      }, 3000);
         }
+          setTimeout(() => {
+            setShowResultPopup(true);
+          },1000);
+      
         setResultState(data.result);
         
       })
@@ -86,9 +92,7 @@ const MainPage = () => {
       });
 
 
-      setTimeout(() => {
-        setShowResultPopup(true);
-      }, 1000);
+      
 
   };
 
@@ -125,11 +129,15 @@ const MainPage = () => {
   }
   
   function reset(){
-    setChances(chances - 1);
-    setUserMove(-1);
-    setComputerMove(-1);
-    setShowResultPopup(false);
-    setButtonDisabled(false);
+    if (chances!=10)
+    {
+      setChances(chances + 1);
+      setUserMove(-1);
+      setComputerMove(-1);
+      setShowResultPopup(false);
+      setButtonDisabled(false);
+    }
+    
   }
 
   function ChoiceButtons(){
@@ -152,18 +160,17 @@ const MainPage = () => {
   }
 
   function ResultPopup(){
+    setTimeout(() => {
+      reset();
+    },1000);
   return(
-    <div className='result-box' >
-      <div className='box' >
+      <div className='result-label'>
       {resultState===-1 && <h1 className="you-win-text" data-text="YOU LOSE">YOU LOSE</h1>}
       {resultState===0 && <h1 className="you-win-text" data-text="DRAW">DRAW</h1>}
       {resultState===1 && <h1 className="you-win-text" data-text="YOU WIN">YOU WIN</h1>}
-     
-          <button className="proceed-button round-4" onClick={reset}>Proceed</button>
       </div>
-
-    </div>
   )
+
 
 
   }
@@ -173,10 +180,11 @@ const MainPage = () => {
     fetchHistory();
     setUserMove(-1);
     setComputerMove(-1);
-    setChances(10);
+    setChances(1);
     setComputerScore(0);
     setUserScore(0);
     setFinal(0);
+    setButtonDisabled(false);
 
 
   }
@@ -185,9 +193,9 @@ const MainPage = () => {
     return(
       <div className='result-box' >
         <div className='box' >
-        {userScore < computerScore && <h1 className="you-win-text" data-text="YOU LOSE">YOU LOSE</h1>}
-        {userScore === computerScore && <h1 className="you-win-text" data-text="DRAW">DRAW</h1>}
-        {userScore > computerScore && <h1 className="you-win-text" data-text="YOU WIN">YOU WIN</h1>}
+        {computerScore > userScore   && <h1 className="label-style label-size" data-text="COMPUTER WINS">YOU LOSE</h1>}
+      {computerScore === userScore  && <h1 className="label-style label-size" data-text="DRAW">DRAW</h1>}
+      {computerScore < userScore  && <h1 className="label-style label-size" data-text="YOU WIN">YOU WIN</h1>}
        
             <button className="proceed-button round-4" onClick={resetGame}>New Game</button>
             <button className="proceed-button round-4" onClick={() => navigate("/")}>Back</button>
@@ -202,48 +210,25 @@ const MainPage = () => {
 
     return(
       <div>
-        {/* <button onClick={fetchHistory}>Fetch</button> */}
-        <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
-      <div style={{ display: 'flex', marginBottom: '10px' }}>
-        <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
-          <strong>Wins</strong>
+      {/* <button onClick={fetchHistory}>Fetch</button> */}
+      <div className="table-container">
+        <div className="table-header">
+          <div className="table-cell"><strong>W</strong></div>
+          <div className="table-cell"><strong>L</strong></div>
+          <div className="table-cell"><strong>D</strong></div>
+          <div className="table-cell date-column"><strong>Date</strong></div>
         </div>
-        <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
-          <strong>Loses</strong>
-        </div>
-        <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
-          <strong>Draws</strong>
-        </div>
-        <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
-          <strong>Score</strong>
-        </div>
-        <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
-          <strong>Date</strong>
-        </div>
-      </div>
 
-      {historyArray.map((item, index) => (
-        <div key={index} style={{ display: 'flex', marginBottom: '10px' }}>
-          <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
-            {item.wins}
+        {historyArray.map((item, index) => (
+          <div key={index} className="table-row">
+            <div className="table-cell">{item.wins}</div>
+            <div className="table-cell">{item.loses}</div>
+            <div className="table-cell">{item.draws}</div>
+            <div className="table-cell date-column">{item.date}</div>
           </div>
-          <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
-            {item.loses}
-          </div>
-          <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
-            {item.draws}
-          </div>
-          <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
-            {item.score}
-          </div>
-          <div style={{ flex: 1, textAlign: 'center', border: '1px solid #ccc', padding: '10px' }}>
-            {item.date}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-
-      </div>
     );
   }
 
@@ -255,11 +240,21 @@ const MainPage = () => {
 
   return (
     <div className="main-page">
-      <HistoryDisplay />
+      {/* <HistoryDisplay /> */}
+      <div className="score-label">
+        <h2 className='label-style'>{userName}'s Score: {userScore}</h2>
+        <h2 className='label-style'> Computer Score: {computerScore}</h2> 
+        </div>
+      <div className="chance-label">
+        <h2 className='label-style'>Round : {chances}/10 </h2>
+        </div>
+      <div className='result-container'>
+      {userMove !== -1 && computerMove !== -1 && showResultPopup && finalToggle === 0 && <div className='result-box'/>&& <ResultPopup/> }
+        </div>
+
       <div className="game-container">
-        <div className="game-section">
-        <div className="score-label">{userName}'s Score: {userScore} </div>
-        <div className="score-label">Chances : {chances} </div>
+        
+        
           <div className="user-gif">
 
           {userMove === -1 && <img src={userGif} alt="Rock" className=".output-image" /> }
@@ -272,16 +267,12 @@ const MainPage = () => {
 
           </div>
           
-          <ChoiceButtons /> 
+           
           
-        </div>
+      
 
         <div className="divider"></div>
-        <div className="computer-side">
-          <div className="computer-gap"></div>
-          <div className="game-section">
-            <div className="score-label">Computer Score: {computerScore}</div>
-            <div className="score-space"> </div>
+
             <div className="computer-gif">
 
             {computerMove === -1 && <img src={computerGif} alt="Rock" className=".output-image" />}
@@ -290,11 +281,11 @@ const MainPage = () => {
             {computerMove === 2 && <img src={scissorsImageR} alt="Rock" className=".output-image" />}
             
             </div>
-            
-          </div>
-        </div>
+          
+        
       </div>
-      {userMove !== -1 && computerMove !== -1 && showResultPopup && finalToggle === 0 && <div className='result-box'/>&& <ResultPopup/> }
+      <ChoiceButtons />
+      
       {finalToggle === 1 && <div className='result-box'/>&& <FinalPopup/> }
       {/* {userMove !== -1 && computerMove !== -1 && showResultPopup && <div className='result-box'/>&& <ResultPopup/> } */}
     </div>
