@@ -56,8 +56,9 @@ const MainPage = () => {
           setComputerMove(data.computer);
           setChances(data.chances);
           console.log("chances -- >" +chances+" "+data.chances)
-          if(data.chances === 10){
+          if(data.chances === 9){
             setFinal(1);
+            
           }
         }
 
@@ -70,9 +71,7 @@ const MainPage = () => {
           }
           setUserMove(userChoice);
           setComputerMove(data.computer);
-          //setChances(0);
-          setFinal(1);
-          
+          //setChances(0);          
           fetchHistory();
           // test
         }
@@ -174,6 +173,7 @@ const MainPage = () => {
     setChances(10);
     setComputerScore(0);
     setUserScore(0);
+    setFinal(0);
 
 
   }
