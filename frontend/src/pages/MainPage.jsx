@@ -89,6 +89,7 @@ const MainPage = () => {
 
       .catch(error => {
           console.error('Error:', error);
+          // test for commit
       });
 
 
