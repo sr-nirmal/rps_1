@@ -37,39 +37,31 @@
 
 .score-label {
   font-size: 1.5rem;
-  margin-bottom: 20px;
+  margin-bottom: 4vh;
 }
 
 .user-gif{
-  margin-top: 100px;
+  margin-top: 10vh;
   height:28vh;
 }
 
 .computer-gif{
-  margin-top: 100px;
+  margin-top: 10vh;
 }
 .button-box{
   margin-top: 1.5rem;
 }
 
 .buttons-container {
-  margin-top: 70px;
+  margin-top: 7vh;
   display: flex;
-  gap: 10px;
+  gap: 1vh;
 }
 
 .score-space{
-  height: 50px;;
+  height: 5vh;;
 }
-.game-button {
-  width: 130px;
-  height: auto;
-  cursor: pointer;
-  transition: transform 0.2s;
-  border: none; 
-  background: none; 
-  padding: 0; 
-}
+
 
 .button-image {
   width: 100%;
@@ -77,8 +69,8 @@
 }
 
 .output-image{
-  width: 320px;
-  height: 320px;
+  width: 32vh;
+  height: 32vh;
 }
 .computer-side{
   display: flex;
@@ -88,7 +80,7 @@
 }
 
 .computer-gap{
-  width: 20px;
+  width: 2vh;
 }
 
 .result-box{
@@ -106,18 +98,22 @@
 }
 
 .box{
-  width: 70vb;
-  height: 50vh;
+  min-height: 50vb;
+  min-width: 70vb;
+  width: auto;
+  height: auto;
   background-color: #29b5e5;
   border: 1px solid #999;
   border-radius: 20%;
   margin: 20px;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   white-space: nowrap;
   align-items: center;
-  
+  justify-content: space-evenly;
+  gap: 2rem;
+  padding-bottom: 1rem;
 
 }
 
@@ -128,9 +124,9 @@
   color: white;
   border: none;
   padding: 5px;
-  font-size: 31px;
-  height: 130px;
-  width: 130px;
+  font-size: 3.1vh;
+  height: 13vh;
+  width: 13vb;
   box-shadow: 0 2px 4px darkslategray;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -156,7 +152,7 @@
   color: white;
   border: none;
   padding: 5px;
-  font-size: 31px;
+  font-size: 3.1vh;
   height: 10vh;
   width: 20vb;
   box-shadow: 0 2px 4px darkslategray;
@@ -183,9 +179,11 @@
 
 .you-win-text{
   position: relative;
-  font-size: 7vw;
-  color: #29b5e5;
-  -webkit-text-stroke: 0.3vw #34a1c6;
+    font-size: 7vw;
+    color: #29b5e5;
+    -webkit-text-stroke: 0.3vw #34a1c6;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   
 }
 
