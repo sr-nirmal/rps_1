@@ -29,6 +29,7 @@ const MainPage = () => {
   const[historyArray, setHistory] = useState([]);
   const [refreshHistory, setRefreshHistory] = useState(1);
   const [finalToggle, setFinal] = useState(0);
+  const [showHistory,setshowHistory] = useState(0);
 
 
 
@@ -194,7 +195,7 @@ const MainPage = () => {
     return(
       <div className='result-box' >
         <div className='box' >
-        {computerScore > userScore   && <h1 className="label-style label-size" data-text="COMPUTER WINS">YOU LOSE</h1>}
+        {computerScore > userScore   && <h1 className="label-style label-size" data-text="COMPUTER WINS">COMPUTER WINS</h1>}
       {computerScore === userScore  && <h1 className="label-style label-size" data-text="DRAW">DRAW</h1>}
       {computerScore < userScore  && <h1 className="label-style label-size" data-text="YOU WIN">YOU WIN</h1>}
        
@@ -210,16 +211,24 @@ const MainPage = () => {
   function HistoryDisplay(){
 
     return(
+      <div className='result-box'>
+      {/* Add a small button here */}
+      
       <div>
-      {/* <button onClick={fetchHistory}>Fetch</button> */}
+        <button className="top-left-button" onClick={()=>setshowHistory(0)} >
+        <span>&larr;</span> 
+        </button>
+      </div>
       <div className="table-container">
+      
+      
         <div className="table-header">
           <div className="table-cell"><strong>W</strong></div>
           <div className="table-cell"><strong>L</strong></div>
           <div className="table-cell"><strong>D</strong></div>
           <div className="table-cell date-column"><strong>Date</strong></div>
         </div>
-
+    
         {historyArray.map((item, index) => (
           <div key={index} className="table-row">
             <div className="table-cell">{item.wins}</div>
@@ -241,7 +250,11 @@ const MainPage = () => {
 
   return (
     <div className="main-page">
-      {/* <HistoryDisplay /> */}
+      <div className='backbutton-container'>
+      <button className="backButton" onClick={() => navigate("/")}>
+      <span>&larr;</span> 
+    </button>
+      </div>
       <div className="score-label">
         <h2 className='label-style'>{userName}'s Score: {userScore}</h2>
         <h2 className='label-style'> Computer Score: {computerScore}</h2> 
@@ -258,36 +271,29 @@ const MainPage = () => {
         
           <div className="user-gif">
 
-          {userMove === -1 && <img src={userGif} alt="Rock" className=".output-image" /> }
-          {userMove === 0 && <img src={rockImageL} alt="Rock" className=".output-image" /> }
-          {userMove === 1 && <img src={paperImageL} alt="Paper" className=".output-image" /> }
-          {userMove === 2 && <img src={scissorsImageL} alt="Scissors" className=".output-image" /> }
-          
-
-
-
+          {userMove === -1 && <img src={userGif} alt="Rock" className="output-image" /> }
+          {userMove === 0 && <img src={rockImageL} alt="Rock" className="output-image" /> }
+          {userMove === 1 && <img src={paperImageL} alt="Paper" className="output-image" /> }
+          {userMove === 2 && <img src={scissorsImageL} alt="Scissors" className="output-image" /> }
           </div>
-          
-           
-          
-      
-
         <div className="divider"></div>
-
             <div className="computer-gif">
 
             {computerMove === -1 && <img src={computerGif} alt="Rock" className=".output-image" />}
             {computerMove === 0 && <img src={rockImageR} alt="Rock" className=".output-image" />}
-            {computerMove === 1 && <img src={paperImageR} alt="Rock" className=".output-image" />}
+            {computerMove === 1 && <img src={paperImageR} alt="Rock" className="output-image" />}
             {computerMove === 2 && <img src={scissorsImageR} alt="Rock" className=".output-image" />}
             
             </div>
-          
-        
       </div>
       <ChoiceButtons />
-      
-      {finalToggle === 1 && <div className='result-box'/>&& <FinalPopup/> }
+      <div className='history-button-container'>
+      <button className="view-history" on onClick={()=>setshowHistory(1)}>
+      <span>View History</span> 
+    </button>
+      </div>
+      {finalToggle === 1 && <FinalPopup/> }
+      {showHistory===1 && <HistoryDisplay/>}
       {/* {userMove !== -1 && computerMove !== -1 && showResultPopup && <div className='result-box'/>&& <ResultPopup/> } */}
     </div>
   );
