@@ -19,7 +19,7 @@ const MainPage = () => {
   const [computerScore, setComputerScore] = useState(0);
   const [userMove, setUserMove] = useState(-1);
   const [computerMove, setComputerMove] = useState(-1);
-  const [chances, setChances] = useState(10);
+  const [chances, setChances] = useState(0);
   const rock = 0;
   const paper = 1;
   const scissor = 2;
@@ -28,6 +28,7 @@ const MainPage = () => {
   const[resultState,setResultState]=useState(2)
   const[historyArray, setHistory] = useState([]);
   const [refreshHistory, setRefreshHistory] = useState(1);
+  const [finalToggle, setFinal] = useState(0);
 
 
 
@@ -53,7 +54,11 @@ const MainPage = () => {
           }
           setUserMove(userChoice);
           setComputerMove(data.computer);
-          setChances(10 - data.chances);
+          setChances(data.chances);
+          console.log("chances -- >" +chances+" "+data.chances)
+          if(data.chances === 10){
+            setFinal(1);
+          }
         }
 
         else{
@@ -65,7 +70,8 @@ const MainPage = () => {
           }
           setUserMove(userChoice);
           setComputerMove(data.computer);
-          setChances(0);
+          //setChances(0);
+          setFinal(1);
           
           fetchHistory();
           // test
@@ -157,7 +163,37 @@ const MainPage = () => {
     </div>
   )
 
+
   }
+
+  function resetGame(){
+    reset();
+    fetchHistory();
+    setUserMove(-1);
+    setComputerMove(-1);
+    setChances(10);
+    setComputerScore(0);
+    setUserScore(0);
+
+
+  }
+
+  function FinalPopup(){
+    return(
+      <div className='result-box' >
+        <div className='box' >
+        {userScore < computerScore && <h1 className="you-win-text" data-text="YOU LOSE">YOU LOSE</h1>}
+        {userScore === computerScore && <h1 className="you-win-text" data-text="DRAW">DRAW</h1>}
+        {userScore > computerScore && <h1 className="you-win-text" data-text="YOU WIN">YOU WIN</h1>}
+       
+            <button className="proceed-button round-4" onClick={resetGame}>New Game</button>
+            <button className="proceed-button round-4" onClick={() => navigate("/")}>Back</button>
+        </div>
+  
+      </div>
+    )
+  
+    }
 
   function HistoryDisplay(){
 
@@ -220,7 +256,7 @@ const MainPage = () => {
       <div className="game-container">
         <div className="game-section">
         <div className="score-label">{userName}'s Score: {userScore} </div>
-        <div className="score-label">Chances : {chances} </div>
+        <div className="score-label">Chances : {10 - chances} </div>
           <div className="user-gif">
 
           {userMove === -1 && <img src={userGif} alt="Rock" className=".output-image" /> }
@@ -255,7 +291,9 @@ const MainPage = () => {
           </div>
         </div>
       </div>
-      {userMove !== -1 && computerMove !== -1 && showResultPopup && <div className='result-box'/>&& <ResultPopup/> }
+      {userMove !== -1 && computerMove !== -1 && showResultPopup && finalToggle === 0 && <div className='result-box'/>&& <ResultPopup/> }
+      {userMove !== -1 && computerMove !== -1 && showResultPopup && finalToggle === 1 && <div className='result-box'/>&& <FinalPopup/> }
+      {/* {userMove !== -1 && computerMove !== -1 && showResultPopup && <div className='result-box'/>&& <ResultPopup/> } */}
     </div>
   );
 };
