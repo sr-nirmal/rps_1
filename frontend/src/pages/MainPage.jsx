@@ -199,8 +199,8 @@ const MainPage = () => {
       {computerScore === userScore  && <h1 className="label-style label-size" data-text="DRAW">DRAW</h1>}
       {computerScore < userScore  && <h1 className="label-style label-size" data-text="YOU WIN">YOU WIN</h1>}
        
-            <button className="proceed-button round-4" onClick={resetGame}>New Game</button>
-            <button className="proceed-button round-4" onClick={() => navigate("/")}>Back</button>
+            <button className="proceed-button round-4" onClick={resetGame}>Play Again</button>
+            
         </div>
   
       </div>
