@@ -12,6 +12,35 @@
     column-gap: 20vb;
     align-items: center;
 }
+.backbutton-container{
+width: 100%;
+
+padding-left: 30px;
+padding-top: 15px;
+}
+
+.backButton {
+  background-color: #0b789c;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 3.1vh;
+  box-shadow: 0 2px 4px darkslategray;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 4rem;
+}
+
+.backButton:active {
+  background-color: #29b5e5;
+  box-shadow: 0 0 2px darkslategray;
+  transform: translateY(2px);
+}
+
+.backButton:hover{
+  box-shadow: 1px 1px 10px darkslategray;
+  transition: all 0.2s ease;
+}
 
 .score-label {
   font-size: 1.5rem;
@@ -19,7 +48,8 @@
   width: 90%;
   display: flex;
   justify-content: space-between;
-  height:7%;
+  height: 2%;
+  align-items: center;
 }
 
 .label-style{
@@ -38,8 +68,10 @@
 }
 .chance-label
 {
-  height:10%;
-  font-size: 1.5rem;
+  height: 3%;
+    display: flex;
+    font-size: 1.5rem;
+    align-items: center;
 }
   
   
@@ -95,8 +127,8 @@
   height: 100%;
 }
 .output-image{
-  width: 32vh;
-  height: 32vh;
+  width: 42vb;
+  height: 38vh;
 }
 .computer-side{
   display: flex;
@@ -220,14 +252,11 @@
   white-space: nowrap;
 }
 
-.label-size
-{
- 
-}
+
 
 .you-win-text{
   position: relative;
-    font-size: 7vw;
+    font-size: 10vh;
     color: #29b5e5;
     -webkit-text-stroke: 0.3vw #34a1c6;
   
@@ -265,18 +294,19 @@
 }
 
 .table-container {
-  max-height: 400px;
+  max-height:70% ;
+  width: 40%;
   overflow-y: auto;
-  background-color: #f0f8ff; /* Light Blue */
-  border-radius: 8px;
+  background-color: #29b5e5; /* Light Blue */
+  border-radius: 10px;
   padding: 10px;
 }
 
 .table-header {
   display: flex;
   margin-bottom: 10px;
-  background-color: #4682b4; /* Steel Blue */
-  color: #fff; /* White */
+  background-color: #06487e; /* Steel Blue */
+  color: #1612da; /* White */
   border-radius: 5px;
   position: sticky;
   top: 0;
@@ -288,6 +318,7 @@
   text-align: center;
   border: 1px solid #ccc;
   padding: 10px;
+  background-color: #29b5e5;
 }
 
 .date-column {
@@ -316,3 +347,63 @@
 .table-container::-webkit-scrollbar-thumb:hover {
   background-color: #4169e1; /* Royal Blue */
 }
+
+
+.top-left-button {
+  position: inherit;
+  background-color: #29b5e5;
+  color: #1612da;
+  border: none;
+  padding: 5px;
+  font-size: 2.3vh;
+  box-shadow: 0 2px 4px darkslategray;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 2rem;
+  margin-bottom: 10px;
+  top: 0;
+  left: 0;;
+}
+
+.top-left-button :active {
+  background-color: #29b5e5;
+  box-shadow: 0 0 2px darkslategray;
+  transform: translateY(2px);
+}
+
+.top-left-button :hover{
+  box-shadow: 1px 1px 10px darkslategray;
+  transition: all 0.2s ease;
+}
+
+.history-button-container{
+  margin-top: 3vb;
+  width: 100%;
+  padding-left: 30px;
+  padding-top: 15px;
+  }
+
+  .view-history {
+    width: 20vb;
+    background-color: #0b789c;
+    color: white;
+    border: none;
+    padding: 5px;
+    font-size: 3.1vh;
+    box-shadow: 0 2px 4px darkslategray;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4rem;
+  }
+  
+  .view-history:active {
+    background-color: #29b5e5;
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+  }
+  
+  .view-history:hover{
+    box-shadow: 1px 1px 10px darkslategray;
+    transition: all 0.2s ease;
+  }
+  
