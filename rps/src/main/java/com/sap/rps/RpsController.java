@@ -83,15 +83,10 @@ public class RpsController {
 		try{
 			this.arr = services.init();
 		}
-		catch(Exception e){}
-		
-		// for(RpsModel printTemp : this.arr){
-		// 	System.out.println(printTemp.name +" "+ printTemp.wins +" "+ printTemp.chances);
-		// 	for(MatchHistory temp1 : printTemp.history){
-		// 		System.out.println("init -> " + temp1.wins+ " " + temp1.loses+ " " + temp1.draws+ " " + temp1.date);
-		// 	}
-		// }
-
+		catch(Exception e){
+			e.printStackTrace();
+			System.out.println("error here...");
+		}
 	}
 	
 
@@ -127,11 +122,13 @@ public class RpsController {
 			
 			
 				if(temp.name.equals(Play.name)){
-					if(temp.chances >= MAX_CHANCES - 1){
+					if(temp.chances >= MAX_CHANCES){
 						System.out.println("Chances at if --> "+temp.chances);
 						date = temp.updateScore();
 						services.writeData(new historyData(temp.name, date, temp.wins, temp.loses, temp.draws));
 						chances =  MAX_CHANCES;
+						int sum = temp.wins+temp.loses+temp.draws;
+						System.out.println("total plays -> " +(sum));
 						temp.wins = 0;
 						temp.loses = 0;
 						temp.draws = 0;

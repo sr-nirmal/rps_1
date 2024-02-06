@@ -19,7 +19,7 @@ const MainPage = () => {
   const [computerScore, setComputerScore] = useState(0);
   const [userMove, setUserMove] = useState(-1);
   const [computerMove, setComputerMove] = useState(-1);
-  const [chances, setChances] = useState(0);
+  const [chances, setChances] = useState(10);
   const rock = 0;
   const paper = 1;
   const scissor = 2;
@@ -44,6 +44,7 @@ const MainPage = () => {
       })
       .then(response => response.json())
       .then(data => {
+        console.log(chances +" --- " +data.chances);
         console.log( userChoice +" "+ data.computer +" " + data.result +" "+data.chances + " " + data.stat);
         if(data.stat === "proceed"){
           if(data.result === -1){
@@ -54,15 +55,12 @@ const MainPage = () => {
           }
           setUserMove(userChoice);
           setComputerMove(data.computer);
-          setChances(data.chances);
+          // setChances(data.chances);
           console.log("chances -- >" +chances+" "+data.chances)
-          if(data.chances === 9){
-            setFinal(1);
-            
-          }
+          
         }
 
-        else{
+        else if(data.stat === "finish"){
           if(data.result === -1){
             setComputerScore(computerScore + 1);
           }
@@ -73,7 +71,11 @@ const MainPage = () => {
           setComputerMove(data.computer);
           //setChances(0);          
           fetchHistory();
+          // setFinal(1);
           // test
+        }
+        if(chances === 1){
+          setFinal(1);
         }
         setResultState(data.result);
         
@@ -123,6 +125,7 @@ const MainPage = () => {
   }
   
   function reset(){
+    setChances(chances - 1);
     setUserMove(-1);
     setComputerMove(-1);
     setShowResultPopup(false);
@@ -256,7 +259,7 @@ const MainPage = () => {
       <div className="game-container">
         <div className="game-section">
         <div className="score-label">{userName}'s Score: {userScore} </div>
-        <div className="score-label">Chances : {10 - chances} </div>
+        <div className="score-label">Chances : {chances} </div>
           <div className="user-gif">
 
           {userMove === -1 && <img src={userGif} alt="Rock" className=".output-image" /> }
@@ -292,7 +295,7 @@ const MainPage = () => {
         </div>
       </div>
       {userMove !== -1 && computerMove !== -1 && showResultPopup && finalToggle === 0 && <div className='result-box'/>&& <ResultPopup/> }
-      {userMove !== -1 && computerMove !== -1 && showResultPopup && finalToggle === 1 && <div className='result-box'/>&& <FinalPopup/> }
+      {finalToggle === 1 && <div className='result-box'/>&& <FinalPopup/> }
       {/* {userMove !== -1 && computerMove !== -1 && showResultPopup && <div className='result-box'/>&& <ResultPopup/> } */}
     </div>
   );
