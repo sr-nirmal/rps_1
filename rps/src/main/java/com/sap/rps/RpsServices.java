@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class wRpsServices{
+public class RpsServices{
 
     int rock = 0;
     int paper = 1;
