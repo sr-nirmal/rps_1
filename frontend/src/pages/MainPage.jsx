@@ -278,10 +278,12 @@ const MainPage = () => {
           </div>
         <div className="divider"></div>
             <div className="computer-gif">
-            {computerMove === -1 && <img src={computerGif} alt="Rock" className="output-image" />}
-            {computerMove === 0 && <img src={rockImageR} alt="Rock" className="output-image" />}
+
+            {computerMove === -1 && <img src={computerGif} alt="Rock" className=".output-image" />}
+            {computerMove === 0 && <img src={rockImageR} alt="Rock" className=".output-image" />}
             {computerMove === 1 && <img src={paperImageR} alt="Rock" className="output-image" />}
-            {computerMove === 2 && <img src={scissorsImageR} alt="Rock" className="output-image" />}
+            {computerMove === 2 && <img src={scissorsImageR} alt="Rock" className=".output-image" />}
+            
             </div>
       </div>
       <ChoiceButtons />

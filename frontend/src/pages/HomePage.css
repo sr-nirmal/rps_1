@@ -50,3 +50,49 @@ input {
 .start-button.pressed {
   transform: scale(0.95);
 }
+.instButton{
+  width: auto;
+  height: 50px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: transform 0.2s;
+  border-radius: 30px;
+  font-size: 20px;
+}
+
+
+
+/* Instruction Popup*/
+/* HomePage.css */
+.popup {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center the popup */
+  width: 60%; /* Set the width of the popup */
+  height: 60%; /* Allow height to adjust based on content */
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Update .popup-content to fit the smaller popup */
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%; /* Adjusted width for the popup content */
+  height: auto; /* Allow height to adjust based on content */
+  position: relative; /* Ensure relative positioning for absolute child elements */
+}
+
+/* Update .close button position */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
