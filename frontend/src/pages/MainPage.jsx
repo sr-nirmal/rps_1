@@ -112,7 +112,7 @@ const MainPage = () => {
     
         
         setHistory(data);
-        console.log(historyArray);
+        //console.log(historyArray);
         tempPrint();
 
 
@@ -126,19 +126,19 @@ const MainPage = () => {
   }
   function tempPrint(){
     for( const temp of historyArray){
-      console.log(temp);
+      //console.log(temp);
     }
   }
   
   function reset(){
-    if (chances!=10)
+    if (chances!==10)
     {
       setChances(chances + 1);
-      setUserMove(-1);
-      setComputerMove(-1);
       setShowResultPopup(false);
       setButtonDisabled(false);
     }
+    setUserMove(-1);
+    setComputerMove(-1);
     
   }
 

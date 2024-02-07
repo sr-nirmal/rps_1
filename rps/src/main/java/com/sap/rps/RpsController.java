@@ -122,6 +122,15 @@ public class RpsController {
 			
 			
 				if(temp.name.equals(Play.name)){
+						result = services.check(Play.move);
+						
+						Computer = result[1];
+						Result = result[0];
+						System.out.println("Result -> "+Result+" "+Computer);
+						if(Result == 0){temp.draws++;}
+						if(Result == -1){temp.loses++;}
+						if(Result ==  1){temp.wins++;}
+						chances = ++temp.chances ;
 					if(temp.chances >= MAX_CHANCES){
 						System.out.println("Chances at if --> "+temp.chances);
 						date = temp.updateScore();
@@ -135,21 +144,11 @@ public class RpsController {
 						temp.chances = 0;
 						break;
 					}
-					else{
-						result = services.check(Play.move);
-						
-						Computer = result[1];
-						Result = result[0];
-						System.out.println("Result -> "+Result+" "+Computer);
-						if(Result == 0){temp.draws++;}
-						if(Result == -1){temp.loses++;}
-						if(Result ==  1){temp.wins++;}
-						chances = ++temp.chances ;
 						break;
 				}
 			}
 			
-		}
+
 
 		// for (RpsModel printTemp : arr){
 		// 	System.out.println(printTemp.name +" "+ printTemp.wins +" "+ printTemp.chances);
