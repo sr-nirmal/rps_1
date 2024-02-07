@@ -264,7 +264,39 @@ padding-top: 15px;
 }
 
 
-.you-win-text::before
+.win-color::before
+{
+  content:attr(data-text);
+  position: absolute;
+  top:0;
+  left:0;
+  width:0%;
+  height:100%;
+  color: #12664F;
+  -webkit-text-stroke: 0vw #34a1c6;
+  border-right: 2px solid #095dcb;
+ 
+  overflow: hidden;
+  animation: animate 2s linear infinite;
+}
+
+.lose-color::before
+{
+  content:attr(data-text);
+  position: absolute;
+  top:0;
+  left:0;
+  width:0%;
+  height:100%;
+  color: #96031A;
+  -webkit-text-stroke: 0vw #34a1c6;
+  border-right: 2px solid #095dcb;
+ 
+  overflow: hidden;
+  animation: animate 2s linear infinite;
+}
+
+.draw-color::before
 {
   content:attr(data-text);
   position: absolute;

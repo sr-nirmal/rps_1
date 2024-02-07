@@ -167,9 +167,9 @@ const MainPage = () => {
     },1000);
   return(
       <div className='result-label'>
-      {resultState===-1 && <h1 className="you-win-text" data-text="YOU LOSE">YOU LOSE</h1>}
-      {resultState===0 && <h1 className="you-win-text" data-text="DRAW">DRAW</h1>}
-      {resultState===1 && <h1 className="you-win-text" data-text="YOU WIN">YOU WIN</h1>}
+      {resultState===-1 && <h1 className="you-win-text lose-color" data-text="YOU LOSE">YOU LOSE</h1>}
+      {resultState===0 && <h1 className="you-win-text draw-color" data-text="DRAW">DRAW</h1>}
+      {resultState===1 && <h1 className="you-win-text win-color" data-text="YOU WIN">YOU WIN</h1>}
       </div>
   )
 
